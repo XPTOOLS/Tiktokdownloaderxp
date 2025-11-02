@@ -4,7 +4,7 @@ from pymongo import MongoClient
 import hashlib
 
 # MongoDB Configuration
-MONGODB_URI = os.getenv("MONGODB_URI", "mongodb+srv://anonymousguywas:12345Trials@cluster0.t4nmrtp.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+MONGODB_URI = os.getenv("MONGODB_URI", "")
 DATABASE_NAME = "tiktok_downloader"
 
 # Collections
@@ -14,8 +14,8 @@ COLLECTION_ACTIVITY = "admin_activity"
 COLLECTION_USERS = "admin_users"
 
 # Admin credentials (in production, use environment variables)
-ADMIN_USERNAME = os.getenv("ADMIN_USERNAME", "admin")
-ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", "admin123")
+ADMIN_USERNAME = os.getenv("ADMIN_USERNAME", "")
+ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", "")
 ADMIN_PASSWORD_HASH = hashlib.sha256(ADMIN_PASSWORD.encode()).hexdigest()
 
 # Initialize MongoDB
@@ -33,4 +33,5 @@ try:
     
 except Exception as e:
     logger.error(f"❌ MongoDB connection failed: {e}")
+
     raise
