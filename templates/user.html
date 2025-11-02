@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TIKTOK DOWNLOADER - OLD-STUDIO</title>
+    <link rel="stylesheet" href="/static/css/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+      <div class="loading-content">
+        <div class="tiktok-logo-loader">
+          <div class="music-note note-1">♪</div>
+          <div class="music-note note-2">♪</div>
+          <div class="music-note note-3">♪</div>
+        </div>
+        <h2>TikTok Downloader</h2>
+        <p>Loading amazing experience...</p>
+      </div>
+    </div>
+
+    <!-- Notification Dialog -->
+    <div class="notification-dialog" id="notificationDialog">
+      <div class="dialog-content">
+        <div class="dialog-header">
+          <i class="fas fa-bell"></i>
+          <h3>Admin Notification</h3>
+          <button class="close-dialog" id="closeDialog">&times;</button>
+        </div>
+        <div class="dialog-body">
+          <p id="notificationMessage"></p>
+        </div>
+        <div class="dialog-footer">
+          <button class="dialog-btn primary-btn" id="actionBtn"></button>
+          <button class="dialog-btn secondary-btn" id="cancelBtn">
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="logo-container">
+        <img
+          src="assets/tiktok-logo.png"
+          alt="TikTok Logo"
+          class="logo-img"
+          id="logoImage"
+        />
+        <div class="logo-text">TIKTOK DOWNLOADER</div>
+      </div>
+      <div class="subtitle">Download TikTok Videos Without Watermark</div>
+
+      <div class="input-group">
+        <label class="input-label">Enter TikTok Video URL</label>
+        <input
+          type="text"
+          id="tiktokUrl"
+          class="search-input"
+          placeholder="Paste TikTok URL Here"
+        />
+      </div>
+
+      <button id="downloadBtn" class="download-btn">
+        <i class="fas fa-download"></i>
+        DOWNLOAD VIDEO
+      </button>
+
+      <div class="loading" id="loading">
+        <div class="spinner"></div>
+        ⏳ PROCESSING YOUR REQUEST...
+      </div>
+      <div class="error" id="error"></div>
+      <div class="success" id="success"></div>
+
+      <div class="results-container" id="results"></div>
+
+      <div class="footer">
+        <div class="footer-links">
+          <a
+            href="https://whatsapp.com/channel/0029VbB3G3BH5JM0s7gtKA2d"
+            class="whatsapp-btn"
+            target="_blank"
+          >
+            <i class="fab fa-whatsapp"></i>
+            Join Whatsapp Channel
+          </a>
+          <a
+            href="https://t.me/XPTOOLSTEAM"
+            class="telegram-btn"
+            target="_blank"
+          >
+            <i class="fab fa-telegram"></i>
+            Join Telegram Channel
+          </a>
+        </div>
+        <div class="powered-by">POWERED BY XP TOOLS™</div>
+      </div>
+    </div>
+
+    <script src="/static/js/user.js"></script>
+  </body>
+</html>

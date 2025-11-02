@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Login - TikTok Downloader</title>
+    <link rel="stylesheet" href="/static/css/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    />
+    <style>
+      .login-container {
+        max-width: 400px;
+        margin: 100px auto;
+        padding: 40px;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(10px);
+        animation: slideUp 0.8s ease;
+      }
+
+      .login-header {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .login-header h1 {
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 10px;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #333;
+      }
+
+      .form-input {
+        width: 100%;
+        padding: 15px 20px;
+        border: 2px solid #e0e0e0;
+        border-radius: 10px;
+        font-size: 16px;
+        transition: border-color 0.3s ease;
+        background: #f8f9fa;
+      }
+
+      .form-input:focus {
+        border-color: #667eea;
+        background: white;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+      }
+
+      .login-btn {
+        width: 100%;
+        padding: 15px 30px;
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+      }
+
+      .login-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+      }
+
+      .login-btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      .error-message {
+        color: #dc3545;
+        background: #f8d7da;
+        padding: 12px;
+        border-radius: 10px;
+        margin-top: 15px;
+        display: none;
+        text-align: center;
+      }
+
+      .back-link {
+        text-align: center;
+        margin-top: 20px;
+      }
+
+      .back-link a {
+        color: #667eea;
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      .back-link a:hover {
+        text-decoration: underline;
+      }
+
+      @media (max-width: 480px) {
+        .login-container {
+          margin: 50px 20px;
+          padding: 30px 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-container">
+      <div class="login-header">
+        <h1><i class="fas fa-lock"></i> Admin Login</h1>
+        <p>Access the TikTok Downloader admin panel</p>
+      </div>
+
+      <form id="loginForm">
+        <div class="form-group">
+          <label class="form-label">Username</label>
+          <input
+            type="text"
+            id="username"
+            class="form-input"
+            placeholder="Enter your username"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input
+            type="password"
+            id="password"
+            class="form-input"
+            placeholder="Enter your password"
+            required
+          />
+        </div>
+
+        <button type="submit" class="login-btn" id="loginBtn">
+          <i class="fas fa-sign-in-alt"></i>
+          Login
+        </button>
+
+        <div class="error-message" id="errorMessage"></div>
+      </form>
+
+      <div class="back-link">
+        <a href="/">← Back to Main Site</a>
+      </div>
+    </div>
+
+    <script src="/static/js/login.js"></script>
+  </body>
+</html>

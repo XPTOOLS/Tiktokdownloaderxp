@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Panel - TikTok Downloader</title>
+    <link rel="stylesheet" href="/static/css/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      .admin-container {
+        max-width: 1200px;
+        margin: 20px auto;
+        padding: 20px;
+      }
+
+      .admin-header {
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        color: white;
+        padding: 30px;
+        border-radius: 20px;
+        margin-bottom: 30px;
+        text-align: center;
+        position: relative;
+      }
+
+      .admin-header h1 {
+        margin: 0;
+      }
+
+      .admin-header p {
+        margin: 10px 0 0 0;
+      }
+
+      /* Fixed Stats Grid - Smaller and always side by side */
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 15px;
+        margin-bottom: 30px;
+      }
+
+      .stat-card {
+        background: white;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        text-align: center;
+        transition: all 0.3s ease;
+        border: 1px solid #f0f0f0;
+      }
+
+      .stat-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+      }
+
+      .stat-number {
+        font-size: 1.8em;
+        font-weight: bold;
+        color: #667eea;
+        margin-bottom: 8px;
+        line-height: 1;
+      }
+
+      .stat-label {
+        color: #666;
+        font-size: 0.9em;
+        font-weight: 600;
+      }
+
+      .chart-container {
+        background: white;
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        margin-bottom: 30px;
+      }
+
+      .notification-form {
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #333;
+      }
+
+      .form-input,
+      .form-textarea {
+        width: 100%;
+        padding: 12px 15px;
+        border: 2px solid #e0e0e0;
+        border-radius: 10px;
+        font-size: 16px;
+        transition: border-color 0.3s ease;
+      }
+
+      .form-textarea {
+        min-height: 100px;
+        resize: vertical;
+      }
+
+      .form-input:focus,
+      .form-textarea:focus {
+        border-color: #667eea;
+        outline: none;
+      }
+
+      .btn-group {
+        display: flex;
+        gap: 15px;
+        margin-top: 25px;
+      }
+
+      .btn {
+        padding: 12px 30px;
+        border: none;
+        border-radius: 25px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .btn-primary {
+        background: #667eea;
+        color: white;
+      }
+
+      .btn-secondary {
+        background: #6c757d;
+        color: white;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .recent-activity {
+        background: white;
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        margin-top: 30px;
+      }
+
+      .activity-list {
+        max-height: 300px;
+        overflow-y: auto;
+      }
+
+      .activity-item {
+        padding: 15px;
+        border-bottom: 1px solid #e0e0e0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .activity-item:last-child {
+        border-bottom: none;
+      }
+
+      .activity-time {
+        color: #666;
+        font-size: 0.9em;
+      }
+
+      /* Smaller logout button */
+      .logout-btn {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        border: 1px solid white;
+        padding: 6px 12px;
+        border-radius: 15px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 0.8em;
+        transition: all 0.3s ease;
+      }
+
+      .logout-btn:hover {
+        background: rgba(255, 255, 255, 0.3);
+      }
+
+      /* Mobile responsiveness for stats */
+      @media (max-width: 768px) {
+        .stats-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 12px;
+        }
+
+        .stat-card {
+          padding: 15px;
+        }
+
+        .stat-number {
+          font-size: 1.6em;
+        }
+
+        .admin-header {
+          padding: 25px 20px;
+        }
+
+        .logout-btn {
+          position: relative;
+          top: auto;
+          right: auto;
+          margin: 15px auto 0 auto;
+          display: block;
+          width: fit-content;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .stats-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .admin-container {
+          padding: 15px;
+        }
+
+        .chart-container,
+        .notification-form,
+        .recent-activity {
+          padding: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="admin-container">
+      <div class="admin-header">
+        <h1><i class="fas fa-cogs"></i> Admin Panel</h1>
+        <p>TikTok Downloader Analytics & Management</p>
+        <button class="logout-btn" id="logoutBtn">
+          <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
+      </div>
+
+      <!-- Fixed Stats Grid - Always side by side -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number" id="totalVisits">0</div>
+          <div class="stat-label">Total Visits</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="totalDownloads">0</div>
+          <div class="stat-label">Download Attempts</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="todayVisits">0</div>
+          <div class="stat-label">Today's Visits</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="successfulDownloads">0</div>
+          <div class="stat-label">Successful Downloads</div>
+        </div>
+      </div>
+
+      <div class="chart-container">
+        <canvas id="visitsChart"></canvas>
+      </div>
+
+      <div class="notification-form">
+        <h2><i class="fas fa-bell"></i> Push Notification</h2>
+        <div class="form-group">
+          <label class="form-label">Notification Message</label>
+          <textarea
+            id="notificationMessage"
+            class="form-textarea"
+            placeholder="Enter your notification message here..."
+          ></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Action Button Text (Optional)</label>
+          <input
+            type="text"
+            id="actionText"
+            class="form-input"
+            placeholder="e.g., Join Now, Learn More"
+          />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Action URL (Optional)</label>
+          <input
+            type="url"
+            id="actionUrl"
+            class="form-input"
+            placeholder="https://example.com"
+          />
+        </div>
+        <div class="btn-group">
+          <button class="btn btn-primary" onclick="sendNotification()">
+            <i class="fas fa-paper-plane"></i> Send Notification
+          </button>
+          <button class="btn btn-secondary" onclick="clearForm()">
+            <i class="fas fa-trash"></i> Clear Form
+          </button>
+        </div>
+      </div>
+
+      <div class="recent-activity">
+        <h2><i class="fas fa-history"></i> Recent Activity</h2>
+        <div class="activity-list" id="activityList">
+          <!-- Activity items will be loaded here -->
+        </div>
+      </div>
+    </div>
+
+    <script src="/static/js/admin.js"></script>
+  </body>
+</html>
